@@ -1,0 +1,11 @@
+{
+  "name": "boilerplate-webapp",
+  "version": "1.0.0",
+  "description": "Boilerplate for React-Redux-Express Webapp Projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"\""
+  },
+  "author": "pdl39",
+  "license": "ISC"
+}
