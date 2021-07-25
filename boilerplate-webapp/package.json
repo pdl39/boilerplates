@@ -1,7 +1,9 @@
 {
   "name": "boilerplate-webapp",
+  "description": "Boilerplate for React-Redux-Express Webapp with Webpack build",
   "version": "1.0.0",
-  "description": "Boilerplate for React-Redux-Express Webapp Projects",
+  "author": "pdl39",
+  "license": "ISC",
   "main": "./client/app.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
@@ -9,8 +11,6 @@
     "server": "nodemon server",
     "start-dev": "npm run start & npm run start"
   },
-  "author": "pdl39",
-  "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.14.8",
