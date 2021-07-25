@@ -3,6 +3,11 @@
   "description": "Boilerplate for React-Redux-Express Webapp with Webpack build",
   "version": "1.0.0",
   "author": "pdl39",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdl39/boilerplates.git",
+    "directory": "boilerplate-webapp"
+  },
   "license": "ISC",
   "main": "./client/app.js",
   "scripts": {
