@@ -20,3 +20,9 @@ app.use(express.urlencoded());
 
 // API routes
 app.use('/api', require('./api/apiRoutes'));
+
+// send index.html as fallback
+app.get('*', (req, res) => {
+  const indexHtmlPath = path.resolve(__dirname, '..', 'dist', 'index.html');
+  res.sendFile(indexHtmlPath);
+});
