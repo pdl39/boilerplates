@@ -7,6 +7,7 @@ const morgan = require('morgan');
 // CREATE SERVER APP
 const app = express();
 
+
 // MIDDLEWARES
 // logging middleware (in non-testing environment)
 if (process.env.NODE_ENV !== 'testing') app.use(morgan('dev'));
@@ -39,12 +40,4 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-
-// START SERVER
-const PORT = process.env.PORT || 3000;
-const serverListenMessage = () => {
-  console.log(`Server is running on PORT ${PORT}`);
-}
-
-http.createServer(app).listen(80, serverListenMessage);
-https.createServer(app).listen(443, serverListenMessage);
+module.exports = app;
