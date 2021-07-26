@@ -1,6 +1,8 @@
+const path = require('path');
+const http = require('http');
+const https = require('https');
 const express = require('express');
 const morgan = require('morgan');
-const path = require('path');
 
 
 // CREATE SERVER APP
@@ -37,3 +39,13 @@ app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
+
+
+// START SERVER
+const PORT = process.env.PORT || 3000;
+const serverListenMessage = () => {
+  console.log(`Server is running on PORT ${PORT}`);
+}
+
+http.createServer(app).listen(80, serverListenMessage);
+https.createServer(app).listen(443, serverListenMessage);
