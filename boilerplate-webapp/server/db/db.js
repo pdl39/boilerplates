@@ -8,4 +8,12 @@ const db = new Sequelize(
   }
 );
 
+try {
+  await db.authenticate();
+  console.log('Connection to the database has been successfully established.');
+}
+catch (err) {
+  console.error('Failed to connect to databse: ', err);
+}
+
 module.exports = db;
