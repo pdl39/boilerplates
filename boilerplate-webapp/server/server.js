@@ -4,13 +4,12 @@ const https = require('https');
 const express = require('express');
 const morgan = require('morgan');
 
-
 // CREATE SERVER APP
 const app = express();
 
 // MIDDLEWARES
-// logging middleware
-app.use(morgan('dev'));
+// logging middleware (in non-testing environment)
+if (process.env.NODE_ENV !== 'testing') app.use(morgan('dev'));
 
 // static middleware
 const staticAssetsPath = path.resolve(__dirname, '..', 'dist');
