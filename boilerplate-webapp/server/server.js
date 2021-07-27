@@ -1,43 +1,28 @@
-const path = require('path');
-const http = require('http');
-const https = require('https');
-const express = require('express');
-const morgan = require('morgan');
-
-// CREATE SERVER APP
-const app = express();
+const db = require('./db/db');
+const app = require('./app');
+const PORT = process.env.PORT || 3000;
 
 
-// MIDDLEWARES
-// logging middleware (in non-testing environment)
-if (process.env.NODE_ENV !== 'testing') app.use(morgan('dev'));
+const startServer = async () => {
+  try {
+    // TEST DB CONNECTION
+    await db.authenticate();
+    console.log('Connection to the database has been successfully established.');
 
-// static middleware
-const staticAssetsPath = path.resolve(__dirname, '..', 'dist');
-app.use(express.static(staticAssetsPath));
+    // SYNC DB BEFORE STARTING SERVER
+    await db.sync();
+    console.log('Database synced successfully.');
 
-// parsing middlewares
-app.use(express.json());
-app.use(express.urlencoded());
+    // START SERVER
+    const serverListenMessage = () => {
+      console.log(`Server is running on PORT ${PORT}`);
+    };
 
+    app.listen(PORT, serverListenMessage);
+  }
+  catch (err) {
+    console.log(err);
+  }
+};
 
-// API ROUTES
-app.use('/api', require('./api/apiRoutes'));
-
-
-// FALLBACK HANDLER
-// send index.html as fallback
-app.get('*', (req, res) => {
-  const indexHtmlPath = path.resolve(__dirname, '..', 'dist', 'index.html');
-  res.sendFile(indexHtmlPath);
-});
-
-
-// ERROR HANDLER
-app.use((err, req, res, next) => {
-  console.log(err);
-  console.log(err.stack);
-  res.status(err.status || 500).send(err.message || 'Internal server error.');
-});
-
-module.exports = app;
+startServer();
