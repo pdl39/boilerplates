@@ -1,9 +1,8 @@
 .DS_Store
-package-lock.json
+favicon
 
 node_modules
 *bundle.js*
 
 # private files including .env files
-_private_
 .env
