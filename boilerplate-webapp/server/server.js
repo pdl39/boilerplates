@@ -1,21 +1,29 @@
+require('dotenv').config();
 const db = require('./db/db');
 const app = require('./app');
-const PORT = process.env.PORT || 3000;
+const { HOST, PORT } = process.env;
 
 
 const startServer = async () => {
+  console.log('NODE_ENV:', process.env.NODE_ENV)
   try {
     // TEST DB CONNECTION
     await db.authenticate();
-    console.log('Connection to the database has been successfully established.');
+    console.log('Connection to database has been successfully established.');
 
     // SYNC DB BEFORE STARTING SERVER
-    await db.sync();
+    // if in development or test mode, drop the entire database and recreate.
+    if (process.env.NODE_ENV !== 'production') {
+      await db.sync({ force: true });
+    }
+    else {
+      await db.sync();
+    }
     console.log('Database synced successfully.');
 
     // START SERVER
     const serverListenMessage = () => {
-      console.log(`Server is running on PORT ${PORT}`);
+      console.log(`Server is listening on ${HOST}:${PORT}\n`);
     };
 
     app.listen(PORT, serverListenMessage);

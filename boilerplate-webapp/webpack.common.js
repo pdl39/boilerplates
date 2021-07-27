@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    main: path.resolve(__dirname, 'client', 'app')
+    main: path.resolve(__dirname, 'client', 'index.js')
   },
   resolve: {
     mainFields: ['browser', 'module', 'main'],
