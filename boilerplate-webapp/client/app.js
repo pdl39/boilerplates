@@ -1,24 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store/store';
 import Routes from './Routes';
-import './styles/index.css';
 
-const App = (props) => {
+const App = () => {
   return (
-    <Provider store={store}>
-      <Router >
-        <Routes />
-      </Router>
-    </Provider>
-  );
+    <Routes />
+  )
 }
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
 
 export default App;
