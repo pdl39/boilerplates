@@ -11,13 +11,12 @@
   "license": "ISC",
   "main": "./client/index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod",
     "seed": "node server/seed/seed.js",
-    "start": "NODE_ENV=production npm run build & npm run prod-server",
+    "build": "webpack --config webpack.prod",
+    "start": "npm run build & npm run server",
+    "start:dev": "NODE_ENV=development nodemon server/server",
     "start:dev:webpack": "webpack serve --config webpack.dev --open",
-    "start:dev": "NODE_ENV=development npm run dev-server",
-    "dev-server": "nodemon server/server",
-    "prod-server": "node server/server"
+    "server": "NODE_ENV=production node server/server"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
