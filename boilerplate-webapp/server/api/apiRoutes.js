@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // set up routes
-router.use('/dummyRoute', require('./routes/dummyRoute'));
+router.use('/dummy', require('./routes/dummyRouter'));
 // ...
 
 // handle 404
