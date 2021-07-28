@@ -1,9 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import App from './App';
+import './styles/index.css';
 
-const Index = (props) => {
-  return (
-    <main>*** Webapp Boilerplate Root View ***</main>
-  );
-}
-
-export default Index;
+ReactDOM.render(
+  <Provider store={store}>
+    <Router >
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById('app')
+);
