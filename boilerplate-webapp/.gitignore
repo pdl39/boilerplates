@@ -6,3 +6,7 @@ node_modules
 
 # private files including .env files
 .env
+
+# ignore all build generated files in the root dist directory except for index.html
+dist/*
+!dist/index.html
