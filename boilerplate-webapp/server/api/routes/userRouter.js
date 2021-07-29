@@ -11,4 +11,10 @@ router.post('/login', userController.login);
 // POST /api/user/signup
 router.post('/signup', userController.signup);
 
+// POST /api/user/token
+router.post('/token', userController.regenerateAccessToken);
+
+// DELETE /api/user/logout
+router.delete('/logout', userController.logout);
+
 module.exports = router;

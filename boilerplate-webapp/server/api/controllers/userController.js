@@ -1,8 +1,16 @@
 const jwt = require('jsonwebtoken');
 const { REFRESH_TOKEN_SECRET_KEY } = process.env;
 const { User } = require('../../db/models');
-const { throwErr, returnErr } = require('../../utils');
+const { throwErr } = require('../../utils');
 
+/* AUTH LOGIC */
+// Access Token set to expire in 30 seconds (for testing purpose)
+// Refresh Token set to expire in 7 days
+// loggin in generates new Access Token & Refresh Token
+// Use Refresh Token to re-generate Access Token
+// logging out removes Refresh Token
+
+let refreshTokens = []; // this should be stored in the db. Just directly assigning an array here for simplicity.
 
 exports.getUser = async (req, res, next) => {
   try {
@@ -16,6 +24,7 @@ exports.getUser = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const [accessToken, refreshToken] = await User.authenticate(req.body);
+    refreshTokens.push(refreshToken);
     res.json({ accessToken, refreshToken });
   }
   catch (err) {
@@ -52,23 +61,11 @@ exports.regenerateAccessToken = async (req, res, next) => {
       throwErr(401, `Please provide refresh token.`);
     }
 
-    const refreshTokens = []; // this should be stored in the db. Just directly assigning an array here for simplicity.
     if (!refreshTokens.includes(refreshToken)) {
       throwErr(403, `Invalid refresh token.`);
     }
 
-    try {
-      const payload = await jwt.verify(refreshToken, REFRESH_TOKEN_SECRET_KEY);
-    }
-    catch (err) {
-      throwErr(403, 'Refresh token verification failed.');
-    }
-
-    const user = await User.findOne({
-      where: {
-        username: req.body.username
-      }
-    });
+    const user = await User.findByToken(refreshToken, 'refresh');
 
     const accessToken = await user.generateAccessToken();
     res.json({ accessToken });
@@ -78,8 +75,18 @@ exports.regenerateAccessToken = async (req, res, next) => {
   }
 }
 
+exports.logout = async (req, res, next) => {
+  try {
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token);
+    res.sendStatus(204);
+  }
+  catch (err) {
+    next(err);
+  }
+}
 
-// middleware functions
+
+// middleware
 exports.verifyToken = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;

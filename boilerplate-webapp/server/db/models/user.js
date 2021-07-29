@@ -57,9 +57,11 @@ User.authenticate = async function ({ username, password }) {
   return [accessToken, refreshToken];
 };
 
-User.findByToken = async function (token) {
+User.findByToken = async function (token, tokenType = 'access') {
+  const tokenSecretKey = tokenType === 'refresh' ? REFRESH_TOKEN_SECRET_KEY : ACCESS_TOKEN_SECRET_KEY;
   try {
-    const { id } = await jwt.verify(token, ACCESS_TOKEN_SECRET_KEY);
+    console.log(tokenSecretKey);
+    const { id } = await jwt.verify(token, tokenSecretKey);
     const user = await User.findByPk(id);
     return user;
   }
@@ -78,7 +80,7 @@ User.prototype.generateAccessToken = async function (payload = null, options = n
     id: this.id
   };
   const defaultOptions = {
-    expiresIn: '15s'
+    expiresIn: '30s'
   }
 
   payload = payload ? payload : defaultPayload;
