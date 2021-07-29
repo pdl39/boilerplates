@@ -1,9 +1,11 @@
 const { DataTypes, Op } = require('sequelize');
 const db = require('../db');
-const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { AUTH_PRIVATE_KEY } = process.env;
+const {
+  ACCESS_TOKEN_SECRET_KEY,
+  REFRESH_TOKEN_SECRET_KEY
+} = process.env;
 const { throwErr } = require('../../utils');
 
 // This model functions as an example for handling user authentication
@@ -41,35 +43,62 @@ User.authenticate = async function ({ username, password }) {
       username
     }
   });
-  const isCorrectPassword = await user.verifyPassword(password);
+  if (!user) {
+    throwErr(401, `Username ${username} not found. Please check your username and try again.`)
+  }
 
-  if (!user || !isCorrectPassword) {
+  const isCorrectPassword = await user.verifyPassword(password);
+  if (!isCorrectPassword) {
     throwErr(401, `Incorrect password. Please check your password and try again.`);
   }
 
-  return user.generateToken();
-}
+  const accessToken = await user.generateAccessToken();
+  const refreshToken = await user.generateRefreshToken();
+  return [accessToken, refreshToken];
+};
 
 User.findByToken = async function (token) {
-  const { id } = await jwt.verify(token, process.env.JWT);
-  const user = User.findByPk(id);
-
-  if (!user) {
-    throwErr(401, 'Bad token.');
+  try {
+    const { id } = await jwt.verify(token, ACCESS_TOKEN_SECRET_KEY);
+    const user = await User.findByPk(id);
+    return user;
   }
-
-  return user;
-}
+  catch (err) {
+    throwErr(403, `Token verification failed.`);
+  }
+};
 
 // INSTANCE METHODS
 User.prototype.verifyPassword = async function (inputPassword) {
   return await bcrypt.compare(inputPassword, this.password);
-}
+};
 
-User.prototype.generateToken = async function () {
-  return await jwt.sign({
+User.prototype.generateAccessToken = async function (payload = null, options = null) {
+  const defaultPayload = {
     id: this.id
-  }, process.env.JWT);
+  };
+  const defaultOptions = {
+    expiresIn: '15s'
+  }
+
+  payload = payload ? payload : defaultPayload;
+  options = options ? options : defaultOptions;
+
+  return await jwt.sign(payload, ACCESS_TOKEN_SECRET_KEY, options);
+};
+
+User.prototype.generateRefreshToken = async function (payload = null, options = null) {
+  const defaultPaylod = {
+    id: this.id
+  };
+  const defaultOptions = {
+    expiresIn: '7d'
+  }
+
+  payload = payload ? payload : defaultPaylod;
+  options = options ? options : defaultOptions;
+
+  return await jwt.sign(payload, REFRESH_TOKEN_SECRET_KEY, options);
 }
 
 // HOOKS
