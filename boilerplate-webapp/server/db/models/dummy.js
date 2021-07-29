@@ -1,7 +1,7 @@
 const { DataTypes, Op } = require('sequelize');
 const db = require('../db');
 
-// This file shows sample code for a Sequelize Model.
+// This model functions as an example code for a Sequelize Model.
 const Dummy = db.define('dummy', {
   name: {
     type: DataTypes.STRING,
