@@ -1,7 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { REFRESH_TOKEN_SECRET_KEY } = process.env;
-const { User } = require('../../db/models');
-const { throwErr } = require('../../utils');
+const { User } = require('../../../db/models');
+const { throwErr } = require('../../../utils');
 
 /* AUTH LOGIC */
 // Access Token set to expire in 30 seconds (for testing purpose)

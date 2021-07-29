@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { returnErr } = require('../utils');
+const { returnErr } = require('../../utils');
 
 // set up routes
 router.use('/dummy', require('./routes/dummyRouter'));
-router.use('/user', require('./routes/userRouter'));
 // ...
 
 // handle 404

@@ -1,5 +1,5 @@
-const { Dummy } = require('../../db/models');
-const { throwErr } = require('../../utils');
+const { Dummy } = require('../../../db/models');
+const { throwErr } = require('../../../utils');
 
 exports.getDummiesList = async (req, res, next) => {
   try {
