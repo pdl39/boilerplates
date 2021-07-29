@@ -6,7 +6,7 @@ const {
   ACCESS_TOKEN_SECRET_KEY,
   REFRESH_TOKEN_SECRET_KEY
 } = process.env;
-const { throwErr } = require('../../utils');
+const { throwErr, changeErrStatus } = require('../../utils');
 
 // This model functions as an example for handling user authentication
 const User = db.define('user', {
@@ -64,7 +64,7 @@ User.findByToken = async function (token) {
     return user;
   }
   catch (err) {
-    throwErr(403, `Token verification failed.`);
+    throw changeErrStatus(403, err);
   }
 };
 
