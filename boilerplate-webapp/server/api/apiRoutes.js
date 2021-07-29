@@ -4,6 +4,7 @@ const { returnErr } = require('../utils');
 
 // set up routes
 router.use('/dummy', require('./routes/dummyRouter'));
+router.use('/user', require('./routes/userRouter'));
 // ...
 
 // handle 404
