@@ -34,8 +34,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 
-// API ROUTES
-app.use('/api', require('./api/apiRoutes'));
+// ROUTES
+app.use('/api', require('./routes/api/apiRoutes'));
+app.use('/auth', require('./routes/auth/authRoutes'));
 
 
 // FALLBACK HANDLER

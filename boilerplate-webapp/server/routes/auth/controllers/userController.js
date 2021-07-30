@@ -1,7 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { REFRESH_TOKEN_SECRET_KEY } = process.env;
-const { User } = require('../../db/models');
-const { throwErr } = require('../../utils');
+const { User } = require('../../../db/models');
+const { throwErr } = require('../../../utils');
 
 /* AUTH LOGIC */
 // Access Token set to expire in 30 seconds (for testing purpose)
@@ -90,7 +88,8 @@ exports.logout = async (req, res, next) => {
 exports.verifyToken = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
+    const parsedAuthHeader = authHeader && authHeader.split(' ');
+    const token = parsedAuthHeader.length === 1 ? parsedAuthHeader[0] : parsedAuthHeader[1];
     if (!token) {
       throwErr(401, `Token not found in request header`);
     }
