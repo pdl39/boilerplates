@@ -1,0 +1,19 @@
+### GET DUMMIES LIST
+
+GET http://localhost:3000/api/dummy
+Content-Type: application/json
+
+### CREATE DUMMY
+
+POST http://localhost:3000/api/dummy
+Content-Type: application/json
+
+{
+  "name": "Dummy One",
+  "dummyType": "PARENT"
+}
+
+### GET DUMMY
+
+GET http://localhost:3000/api/dummy/1
+Content-Type: application/json

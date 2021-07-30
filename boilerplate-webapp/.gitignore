@@ -10,7 +10,3 @@ node_modules
 # ignore all build generated files in the root dist directory except for index.html
 dist/*
 !dist/index.html
-
-# Rest Client folder
-_restClient
-
