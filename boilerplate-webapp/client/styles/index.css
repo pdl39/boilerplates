@@ -23,3 +23,59 @@ a {
 ol, ul {
   list-style: none;
 }
+
+div.signup-login.container {
+  display: flex;
+  justify-content: center;
+}
+
+div.signup-login.container > a {
+  margin: 5px;
+  background-color: aquamarine;
+}
+
+div.form.container {
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+}
+
+form > div.input {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  margin: 3px;
+}
+
+form > div.input > input {
+  border: 0.5px solid grey;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+form > button {
+  width: 70%;
+  padding: 3px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: rgba(92, 201, 245, 0.7);
+  transition: background-color 1s;
+}
+
+form > button:hover {
+  background-color: rgba(92, 201, 245, 1.00)
+}
+
+
