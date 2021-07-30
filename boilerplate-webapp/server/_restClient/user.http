@@ -1,0 +1,45 @@
+### GET USER PAGE
+
+GET http://localhost:3000/auth/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI3NjAwNjg2LCJleHAiOjE2Mjc2MDA3MTZ9.b0aUy2MAn1cOnpLYNdReRuHqg_wpMmszLoa8cTScCgI
+
+### LOGIN
+
+POST http://localhost:3000/auth/user/login
+Content-Type: application/json
+
+{
+  "username": "ex1Username",
+  "password": "wfjip23890!"
+}
+
+### SIGNUP
+
+POST http://localhost:3000/auth/user/signup
+Content-Type: application/json
+
+{
+  "nameFirst": "Sam",
+  "nameLast": "Ple",
+  "username": "ex1Username",
+  "password": "wfjip23890!"
+}
+
+
+### REGENERATE ACCESS TOKEN
+
+POST http://localhost:3000/auth/user/token
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI3NjAwNjQ5LCJleHAiOjE2MjgyMDU0NDl9.N3uyICJmtEUTtPWzNV45oP3A69CL42cXPzuU6r73Df0"
+}
+
+### LOGOUT
+
+DELETE http://localhost:3000/auth/user/logout
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI3NjAwNjQ5LCJleHAiOjE2MjgyMDU0NDl9.N3uyICJmtEUTtPWzNV45oP3A69CL42cXPzuU6r73Df0"
+}
