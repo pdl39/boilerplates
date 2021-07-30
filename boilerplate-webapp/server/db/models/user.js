@@ -60,7 +60,6 @@ User.authenticate = async function ({ username, password }) {
 User.findByToken = async function (token, tokenType = 'access') {
   const tokenSecretKey = tokenType === 'refresh' ? REFRESH_TOKEN_SECRET_KEY : ACCESS_TOKEN_SECRET_KEY;
   try {
-    console.log(tokenSecretKey);
     const { id } = await jwt.verify(token, tokenSecretKey);
     const user = await User.findByPk(id);
     return user;
