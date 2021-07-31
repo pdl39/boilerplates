@@ -6,7 +6,7 @@ module.exports = {
     main: path.resolve(__dirname, 'client', 'index.js')
   },
   resolve: {
-    mainFields: ['browser', 'module', 'main'],
+    // mainFields: ['browser', 'module', 'main'],
     extensions: ['.js', '.json'],
     mainFiles: ['index'],
     modules: ['node_modules']
