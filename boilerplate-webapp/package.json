@@ -2,6 +2,9 @@
   "name": "boilerplate-webapp",
   "description": "Boilerplate for React-Redux-Express Webapp with Webpack build",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "author": "pdl39",
   "repository": {
     "type": "git",
