@@ -12,7 +12,6 @@
     "directory": "boilerplate-webapp"
   },
   "license": "ISC",
-  "main": "./client/index.js",
   "scripts": {
     "seed": "node server/seed/seed.js",
     "build": "webpack --config webpack.prod",
