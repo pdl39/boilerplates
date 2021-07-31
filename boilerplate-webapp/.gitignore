@@ -1,5 +1,4 @@
 .DS_Store
-favicon
 
 node_modules
 *bundle.js*
@@ -10,3 +9,18 @@ node_modules
 # ignore all build generated files in the root dist directory except for index.html
 dist/*
 !dist/index.html
+
+# also within dist, include only favicon.ico in dist/assets/favicon/
+###
+# logic for including a specific file/folder within a subdirectory of an ignored parent directory:
+# 1) first un-ignore the subdirectory directly within the ignored parent (e.g. !/dist/assets/)
+# 2) then re-ignore everything inside the subdirectory (e.g. /dist/assets/*)
+# 3) then re-un-ignore the specific file/folder within the subdirectory (!/dist/assets/favicon/)
+# repeat this process for deeply nested directories. The key is that you can only un-ignore the direct child.
+# directly un-ignoring the whole path to the desired file/folder will not work (e.g. !/dist/assets/favicon/# favicon.ico)
+###
+!/dist/assets/
+/dist/assets/*
+!/dist/assets/favicon/
+/dist/assets/favicon/*
+!dist/assets/favicon/favicon.ico
