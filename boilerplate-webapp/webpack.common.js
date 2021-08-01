@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -38,6 +39,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CaseSensitivePathsPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'dist/src/index.html')
     })
