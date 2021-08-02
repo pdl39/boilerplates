@@ -13,7 +13,7 @@ const Dashboard = (props) => {
   return (
     <div>
       <h3>Welcome, {name}</h3>
-      <button type="button" onClick={handleLogout}>Logout</button>
+      <button type="button" class="logout" onClick={handleLogout}>Logout</button>
     </div>
   )
 }
