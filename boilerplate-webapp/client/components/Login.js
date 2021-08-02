@@ -31,6 +31,7 @@ const Login = (props) => {
     }
     else {
       window.alert('login success');
+      history.push('/');
     }
 
     setForm(initialForm);

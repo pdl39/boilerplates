@@ -85,7 +85,6 @@ export const logout = (history) => {
 
         window.localStorage.removeItem(accessToken);
         window.localStorage.removeItem(refreshToken);
-        history.push(`/login`);
 
         return dispatch(setAuth({}));
       }

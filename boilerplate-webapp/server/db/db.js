@@ -6,7 +6,7 @@ const config = {
 }
 
 if (process.env.LOGGING === true) delete config.logging;
-if (process.env.DATABASE_URL) {
+if (process.env.NODE_ENV === 'production') {
   config.dialectOptions = {
     ssl: {
       rejectUnauthorized: false

@@ -24,6 +24,10 @@ ol, ul {
   list-style: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 div.signup-login.container {
   display: flex;
   justify-content: center;
@@ -35,7 +39,8 @@ div.signup-login.container > a {
 }
 
 div.form.container {
-  width: 50%;
+  min-width: 600px;
+  max-width: 600px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -45,7 +50,12 @@ div.form.container {
   justify-content: center;
 }
 
+div.to-home {
+  width: 70%;
+}
+
 form {
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,5 +87,3 @@ form > button {
 form > button:hover {
   background-color: rgba(92, 201, 245, 1.00)
 }
-
-
